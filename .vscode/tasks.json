@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Prog8 Build",
+            "type": "shell",
+            "command": "${workspaceFolder}\\compile.bat ${workspaceFolder}",
+            "options": {},
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Prog8 Run",
+            "type": "shell",
+            "command": "${workspaceFolder}\\copyrun.bat",
+            "options": {},
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
