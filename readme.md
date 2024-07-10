@@ -54,7 +54,9 @@ func apply(fa(),cc)
 endfunc
 print apply(inc@,10)
 print apply(dec@,12) 
-Einfache Rekursion
+```
+### Einfache Rekursion
+```
 func factorial(a)
     if a > 1 then
         return factorial(a-1)*a
