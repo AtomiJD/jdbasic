@@ -9,25 +9,28 @@ You need:
 
 cx16 emulation and Prog8 installed
 
-Prog8 must be a subfolder of cx16 emulation
-The repository must be a subfolder of prog8 to work
+Prog8 must be a subfolder of cx16 emulation.
+
+The repository must be a subfolder of prog8 to work.
 
 open a command shell and goto subfolder "jdbasic" an start with "code ."
 
 compile with Shift-Control-B
+
 run with Shift-Control-R and "Prog8 run"
 
 ## DOS commands:
+```
 dir
 edit
 load
 list
 run
-
+```
 
 ## BASIC 
 ### Definition call of functions
-
+```
 func lall(a,b)
     return a*b
 endfunc
@@ -35,10 +38,10 @@ endfunc
 print "func call:"
 b=lall(5,3)
 print b
-
-
+```
 
 ### Using higher order functions
+```
 func inc(ab)
     return ab+1
 endfunc
@@ -62,8 +65,10 @@ endfunc
 
 lall =  factorial(5)
 print "erg: ", lall
+```
 
 ### Recursions
+```
 func printnumbers(n)
     if n > 0 then
         print n
@@ -72,8 +77,10 @@ func printnumbers(n)
 endfunc
 
 r=printnumbers(5)  ; Gibt 5, 4, 3, 2, 1 aus
- 
-Lists and map-like functions
+```
+
+### Lists and map-like functions
+```
 numbers[]=[1,2,3,4,5]
 result[]=[0,0,0,0,0]
 
@@ -111,9 +118,10 @@ map(dec@,numbers[],result[])
 printresult()
 
 print 
-
+```
 
 ### Filter functions for lists
+```
 numbers[]=[1,2,3,4,5]
 result[]=[0,0,0,0,0]
 
@@ -151,4 +159,4 @@ print "Result filter: "
 printresult()
 
 print
-
+```
