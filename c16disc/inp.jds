@@ -1,0 +1,10 @@
+print "name eintippen:"
+input a$
+print "wie alt bist du?"
+input alter
+print "du heisst: ", a$
+print "du bist ", alter
+print "press the any key"
+key=get()
+print key
+

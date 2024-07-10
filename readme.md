@@ -55,7 +55,7 @@ endfunc
 print apply(inc@,10)
 print apply(dec@,12) 
 ```
-### Einfache Rekursion
+### Simle  recursion
 ```
 func factorial(a)
     if a > 1 then

@@ -18,12 +18,12 @@ apu {
         ubyte op4
         r1 = expr();
         op4 = @(main.pcode)
-        txt.nl()
-        txt.print("if: ")
-        txt.print_uwhex(r1,true)
-        txt.print("op: ")
-        txt.print_ubhex(op4,true)
-        txt.nl()
+        ; txt.nl()
+        ; txt.print("if: ")
+        ; txt.print_uwhex(r1,true)
+        ; txt.print("op: ")
+        ; txt.print_ubhex(op4,true)
+        ; txt.nl()
         while(op4 == tokens.C_LT or
             op4 == tokens.C_GT or
             op4 == tokens.C_EQ) {

@@ -1,0 +1,90 @@
+cls
+print "graph demo"
+print "press the any key"
+
+a=get()
+
+color 5,0
+
+ax=1
+ay=1
+bx=1
+by=1
+
+dx=4
+dy=3
+
+xa=20
+ya=20
+
+xb=40
+yb=40
+
+loop:
+
+if ax=1 then
+    xa=xa+dx
+else
+    xa=xa-dx
+endif
+
+if xa>310 then
+    ax=0
+endif
+
+if xa< 10 then
+    ax=1
+endif
+
+if bx=1 then
+    xb=xb+dx
+else
+    xb=xb-dx
+endif
+
+if xb>310 then
+    bx=0
+endif
+
+if xb< 10 then
+    bx=1
+endif
+
+if ay=1 then
+    ya=ya+dy
+else
+    ya=ya-dy
+endif
+
+if ya>190 then
+    ay=0
+endif
+
+if ya< 10 then
+    ay=1
+endif
+
+print xa,ya,xb,yb,ax,bx,ay,by,dx,dy
+
+if by=1 then
+    yb=yb+dy
+else
+    yb=yb-dy
+endif
+
+if yb>190 then
+    by=0
+endif
+
+if yb< 10 then
+    by=1
+endif
+
+
+goto loop
+
+
+b=get()
+
+
+print "thats all folks"

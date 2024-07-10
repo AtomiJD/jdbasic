@@ -1,0 +1,11 @@
+x0=1
+a4=2
+x_y=5
+
+print x0,a4,x_y
+
+x=8
+y=10
+
+print x-y
+

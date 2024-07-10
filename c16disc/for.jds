@@ -1,0 +1,4 @@
+a=100
+for i = 1 to a
+    print i; " ";
+next i

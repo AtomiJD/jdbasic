@@ -1,0 +1,72 @@
+f=256
+
+func tof(x)
+    return x*f
+endfunc
+
+func toi(x)
+    return x/f
+endfunc
+
+func mul(x,y)
+    return x*y/f
+endfunc
+
+func add(x,y)
+    return x+y
+endfunc
+
+func sub(x,y)
+    return x-y
+endfunc
+
+mw=80
+mh=60
+mi=40
+
+mwz=76
+mhz=58
+
+func mandel(px,py)
+    xa=tof(px*4) / mwz
+    ya=tof(py*4) / mhz
+    x=0
+    y=0
+    it=0
+
+    loop:
+        xm=mul(x,x)
+        ym=mul(y,y)
+        xs=sub(xm,ym)
+        xb=add(xs,xa)
+        ym=mul(x,y)
+        yi=tof(2)
+        ys=mul(yi,ym)
+        yb=add(ys,ya)
+        x=xb
+        y=yb
+        it=it+1
+        xm=mul(x,x)
+        ym=mul(y,y)
+        xb=add(xm,ym)
+        yi=tof(4)
+        if xb<yi and it<mi then
+            goto loop
+        endif
+    return it
+endfunc    
+
+print "start"
+
+for i = 0 to mh
+    for j = 0 to mw
+        co = mandel(i,j)
+        setchr j,i,co+65
+        if co < mi then
+            print ".";
+        endif
+        if co = mi then
+            print " ";
+        endif
+    next j
+next i

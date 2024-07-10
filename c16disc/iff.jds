@@ -1,0 +1,6 @@
+c=5
+if c=10 or c=5 then
+    print "lall"
+else
+    print "lull"
+endif

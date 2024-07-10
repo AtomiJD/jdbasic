@@ -1,0 +1,211 @@
+x[]=[0]*255
+y[]=[0]*255
+
+r=0
+t=0
+score=0
+sd=1
+d=1
+od=1
+xs=8
+ys=8
+x0=10
+y0=10
+x1=0
+y1=0
+power=0
+di=0
+mi=5
+one=1
+
+
+func init()
+    graph 1
+endfunc
+
+func restart()
+    x0=10
+    y0=10
+    x1=0
+    y1=0
+    power=0
+    r=0
+    score=0
+    d=1
+    od=1
+    color 3,0
+    cls
+endfunc
+
+func exit()
+    graph 0
+endfunc
+
+func getdir(a)
+    d = 0
+    if a and 2 = 0 then
+        d=2
+    endif
+    if a and 1 = 0 then
+        d=1
+    endif
+    if a and 4 = 0 then
+        d=3
+    endif
+    if a and 8 = 0 then
+        d=4
+    endif
+    if a and 4096 = 0 then
+        d=5
+    endif
+    if a and 16 = 0 then
+        d=6
+    endif
+    return d
+endfunc
+
+func drawscore()
+    locate 10,0
+    color 5,0
+    print "score:", score
+endfunc
+
+func updatepos()
+    color 0,0
+    rect x[di]*xs,y[di]*xs,xs,ys,1
+    x[di]=x0
+    y[di]=y0
+    di=di+1
+    if di>mi then
+        di=0
+    endif
+    if d = 1 then
+        x0=x0+one
+    endif
+    if d = 2 then
+        x0=x0-one
+    endif
+    if d = 3 then
+        y0=y0+one
+    endif
+    if d = 4 then
+        y0=y0-one
+    endif
+endfunc
+
+func drawsnake()
+    color 4, 4
+    c = getxy(x0*xs, y0*ys)
+    rect x0*xs, y0*ys, xs, ys, 1
+    if x0=x1 then 
+        if y0=y1 then
+            c = 10
+        endif
+    endif
+    if x0>38 then
+        c=4
+    endif
+    if y0>30 then
+        c=4
+    endif
+    if y0<1 then
+        c=4
+    endif
+    return c
+endfunc
+
+func powerup()
+    
+    if  power = 0 then
+        z = rnd()
+        if z mod 10 = 0 then
+            x1 = rnd() / 2048
+            y1 = rnd() / 2184
+            if y1 = 0 then
+                y1 = y1 + 1
+            endif
+            color 2,2
+            rect x1*xs, y1*ys, xs, ys, 1
+            power=1
+        endif
+    endif
+
+    return 0
+endfunc
+
+func check(c)
+    re=c
+    if c = 10 then
+        ;print "c10"
+        re=1
+    endif
+    if c = 5 then
+        ;print "c5"
+        re=1
+    endif
+    if re=1 then
+        score = score + sd
+        sd = sd + 1
+        color 4, 4
+        rect x1*xs, y1*xs, xs, ys, 1
+        power = 0
+        re = 0
+        mi=mi+1
+        ;print "mi", mi
+    endif
+    return re
+endfunc
+
+func tick()
+    j=joy(1)
+    od=d
+    d=getdir(j)
+    if d=0 then
+        d=od
+    endif
+    r=updatepos()
+    r=powerup()
+    r=drawsnake()
+    t=check(r)
+    r=drawscore()
+    return t
+endfunc
+
+func waitforjoy()
+wloop:
+    j=joy(1)
+    if j=0 then
+        goto wloop
+    endif
+endfunc
+
+
+r=init()
+
+gstart:
+r=restart()
+
+gloop:
+    ende = tick()
+    print ende
+    troff
+    for t1 = 1 to 500
+    next t1
+    tron
+    if ende=0 then 
+        goto gloop
+    else
+        cls
+        color 2, 4    
+        locate 15, 10        
+        print "game over"
+        locate 12, 11
+        print "press the any key"
+        waitforjoy()
+        cls
+        goto gstart
+    endif
+
+r=get()
+
+r=exit()

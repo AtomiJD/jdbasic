@@ -1,0 +1,28 @@
+func clump(a,b)
+    rb=rnd()
+    ra=rb/256
+    ra=ra*b
+    ra=ra/256
+    ra=ra+a
+    return ra
+endfunc
+
+
+
+r=rnd(10)
+graph 1
+color 1,0
+
+loop:
+    r=clump(10,180)
+    a=r
+    x=clump(a,200)
+    y=clump(a,100)
+    circle x,y,r
+    i=i+1
+    color i,0
+    if i<255 then
+        goto loop
+    endif
+
+print "thats all folks"

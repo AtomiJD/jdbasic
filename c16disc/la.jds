@@ -1,0 +1,23 @@
+print "Test"
+a=0
+
+loop:
+    if a mod 2 = 0 then
+        print "gerade", a, a mod 2
+    else
+        print "ungerade", a, a mod 2
+    endif
+
+    a=a+1
+
+    if a<10 then 
+        goto loop
+    endif
+
+print "Ende"
+
+func lall()
+    print "in func"
+endfunc
+
+

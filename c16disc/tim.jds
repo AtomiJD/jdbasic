@@ -1,0 +1,8 @@
+t = jiffi()
+for i = 1 to 100
+    print "lall", i
+next i
+print jiffi()-t
+t = jiffi()
+
+    

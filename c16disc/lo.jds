@@ -1,0 +1,8 @@
+func lall(a,b)
+    print a,b
+    return a+b
+endfunc
+
+c=lall(10,180)
+
+print c

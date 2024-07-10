@@ -1,0 +1,5 @@
+a$="atomi"
+b$="loni"
+d$=b$ + " " + a$
+print d$
+

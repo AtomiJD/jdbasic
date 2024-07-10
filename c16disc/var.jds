@@ -1,0 +1,15 @@
+r=1
+t=2
+score=3
+sd=4
+d=5
+od=6
+xs=7
+ys=8
+x0=9
+y0=10
+x1=11
+y1=12
+power=13
+print r,t,score,sd,d,od,xs,ys,x0,y0,x1,y1,power
+

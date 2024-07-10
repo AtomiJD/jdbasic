@@ -1,0 +1,10 @@
+a=65534
+b = not a
+print b
+b = a and 32768
+print b
+a=129
+b = a and 32768
+print b
+
+

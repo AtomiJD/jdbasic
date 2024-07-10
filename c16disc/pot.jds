@@ -1,0 +1,18 @@
+print "start"
+
+
+func mul(a,b)
+    lall=a*b
+    return lall
+endfunc
+
+func pot(m,p)
+    l=m
+    for lu = 1 to p-1
+        l=mul(m,l)
+    next lu
+    return l
+endfunc
+
+print "2 hoch 4:", pot(2,4)
+

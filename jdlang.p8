@@ -130,18 +130,18 @@ runlang {
                     main.pcode++
                     n_t = @(main.pcode)
                     if n_t == tokens.C_RIGHTBRACKET {
-                        txt.print("if ")
+                        ; txt.print("if ")
 
                         @(&varname) = n_funcno
                         @(&varname+1) = n_funcvar
                         jdlocal.insert(varname,cv)  ;save our array name to local var n_funcvar
 
                     } else {
-                        txt.print("else ")
+                        ; txt.print("else ")
                         main.pcode--
                         main.pcode--
                         cv = apu.expr_f()
-                        txt.print_uwhex(cv,true)
+                        ; txt.print_uwhex(cv,true)
                         main.pcode--
                         @(&varname) = n_funcno
                         @(&varname+1) = n_funcvar
@@ -374,34 +374,34 @@ runlang {
         uword value
         i = main.next() ;get index
         r = main.next() ;get C_EQ
-        txt.print("start mt: ")
-        txt.print_ubhex(mt,true)        
-        txt.print(",i: ")
-        txt.print_ubhex(i,true)        
+        ; txt.print("start mt: ")
+        ; txt.print_ubhex(mt,true)        
+        ; txt.print(",i: ")
+        ; txt.print_ubhex(i,true)        
         if r == tokens.C_EQ {
             main.next() ; Skip C_EQ
             varstack.push(vartype as uword)
             varstack.push(i as uword)
             if @(main.pcode) == tokens.CALLFUNC {
-                txt.print("call: , ")
+                ; txt.print("call: , ")
                 value = apu.expr_l()
             } else {
                 if vartype == 2 {
-                    txt.print("call2 : , ")
+                    ; txt.print("call2 : , ")
                     value = apu.expr_str()
                 } else {
                     txt.print("call e: , ")
                     value = apu.expr()
                 }
             }
-            txt.print("val: ")
-            txt.print_uwhex(value,true)
+            ; txt.print("val: ")
+            ; txt.print_uwhex(value,true)
             i = varstack.pop() as ubyte
             vartype = varstack.pop() as ubyte
-            txt.print(", mt: ")
-            txt.print_ubhex(mt,true)        
-            txt.print(", i: ")
-            txt.print_ubhex(i,true)        
+            ; txt.print(", mt: ")
+            ; txt.print_ubhex(mt,true)        
+            ; txt.print(", i: ")
+            ; txt.print_ubhex(i,true)        
 
             txt.nl()
 

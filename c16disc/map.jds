@@ -1,0 +1,37 @@
+numbers[]=[1,2,3,4,5]
+result[]=[0,0,0,0,0]
+
+func printresult() 
+   for i = 0 to len(result[])
+       print result[i], " ";
+   next i
+endfunc
+
+func inc(a)
+    return a+1
+endfunc
+
+func dec(a)
+    return a-1
+endfunc
+
+func map(fu(),in[],out[])
+    for i = 0 to 4
+        n = in[i]
+        out[i]=fu(n)
+    next i
+endfunc
+
+map(inc@,numbers[],result[])
+
+print "Result inc: "
+printresult()
+
+print
+print "Result dec: "
+
+map(dec@,numbers[],result[])
+
+printresult()
+
+print

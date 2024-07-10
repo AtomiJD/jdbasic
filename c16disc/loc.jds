@@ -1,0 +1,11 @@
+locate 10,10
+print "atomi"
+for i = 0 to 15
+    color i,15-i
+    print "loni"
+next i
+color 2,4
+print "timo"
+for i=1 to 27
+    setchr i,20,i+64
+next i

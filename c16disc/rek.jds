@@ -1,0 +1,8 @@
+func printnumbers(n)
+    if n > 0 then
+        print n
+	r=printnumbers(n - 1)
+    endif
+endfunc
+
+r=printnumbers(5)  ; Gibt 5, 4, 3, 2, 1 aus

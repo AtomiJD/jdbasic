@@ -41,9 +41,9 @@ runcmd {
             jdstrvars.set_value(i, main.lineinput)
         } else if r == tokens.VARIANT or r == tokens.INT {
             v = conv.str2uword(main.lineinput)
-            txt.print("lall: ")
-            txt.print_uw(v)
-            txt.nl()
+            ; txt.print("lall: ")
+            ; txt.print_uw(v)
+            ; txt.nl()
             jdvars.set_value(i,v)
         } 
     }

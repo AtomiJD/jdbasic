@@ -1,0 +1,10 @@
+achim=2
+func lall(a,b)
+    return a*b
+endfunc
+
+print "func call:"
+b=1+1
+print b
+b=lall(b,3)
+print b

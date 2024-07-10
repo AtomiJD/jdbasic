@@ -1,0 +1,7 @@
+print chr($8F),chr($8E)
+print "achim"
+a=get()
+print chr($0F)
+
+
+

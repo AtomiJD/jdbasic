@@ -1,0 +1,15 @@
+xa=1
+xb=2
+xc=3
+ya=4
+yb=5
+yc=6
+ax=7
+ay=8
+bx=9
+by=10
+dx=11
+dy=12
+cx=13
+cy=14
+print xa,xb,xc,ya,yb,yc,ax,ay,bx,by,dx,dy,cx,cy

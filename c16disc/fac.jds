@@ -1,0 +1,11 @@
+func factorial(a)
+    if a > 1 then
+        return factorial(a-1)*a
+    else
+        return a
+    endif
+endfunc
+
+lall =  factorial(5)
+print "erg: ", lall
+

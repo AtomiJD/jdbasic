@@ -428,10 +428,10 @@ main {
                             infuncheader = 1
                             paramcount = 0
                             @(pcode) = jdfunc.insert(buffer, val)
-                            txt.print("func: ")
-                            txt.print(buffer)
-                            txt.print(", ")
-                            txt.print_ubhex(@(pcode),true)
+                            ; txt.print("func: ")
+                            ; txt.print(buffer)
+                            ; txt.print(", ")
+                            ; txt.print_ubhex(@(pcode),true)
                             p_funcno = @(pcode)
                             pcode++
                             @(pcode) = 0        ;2 byte for end func address
@@ -450,8 +450,8 @@ main {
                         if infuncheader > 0 {
                             infuncheader = 0
                             strb = fstack1
-                            txt.print(", add1: ")
-                            txt.print_uwhex(pcode,true)
+                            ; txt.print(", add1: ")
+                            ; txt.print_uwhex(pcode,true)
                             @(strb) = lsb(pcode)
                             strb++
                             @(strb) = msb(pcode)
@@ -461,8 +461,8 @@ main {
                         if infuncheader > 0 {
                             infuncheader = 0
                             strb = fstack1
-                            txt.print(", ret: ")
-                            txt.print_uwhex(pcode,true)                            
+                            ; txt.print(", ret: ")
+                            ; txt.print_uwhex(pcode,true)                            
                             @(strb) = lsb(pcode)
                             strb++
                             @(strb) = msb(pcode)
@@ -501,9 +501,9 @@ main {
                         @(pcode) = tokens.ENDFUNC
                         pcode++                        
                         strb = fstack
-                            txt.print(", end: ")
-                            txt.print_uwhex(pcode,true)
-                            txt.nl()
+                            ; txt.print(", end: ")
+                            ; txt.print_uwhex(pcode,true)
+                            ; txt.nl()
                         @(strb) = lsb(pcode)
                         strb++
                         @(strb) = msb(pcode)

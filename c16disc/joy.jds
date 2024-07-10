@@ -1,0 +1,35 @@
+func getdir(a)
+    if a and 2 = 0 then
+        d=2
+    endif
+    if a and 1 = 0 then
+        d=1
+    endif
+    if a and 4 = 0 then
+        d=3
+    endif
+    if a and 8 = 0 then
+        d=4
+    endif
+    if a and 4096 = 0 then
+        d=5
+    endif
+    if a and 16 = 0 then
+        d=6
+    endif
+    return d
+endfunc
+
+
+
+
+loop:
+    for i = 0 to 4
+        j = joy(i)
+        print "joy: ", i, j
+    next i
+    j = joy(1)
+    print j
+    d=getdir(j)
+    print d
+;goto loop
