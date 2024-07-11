@@ -187,11 +187,8 @@ r=restart()
 
 gloop:
     ende = tick()
-    print ende
-    troff
     for t1 = 1 to 500
     next t1
-    tron
     if ende=0 then 
         goto gloop
     else

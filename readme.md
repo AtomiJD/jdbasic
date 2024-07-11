@@ -29,7 +29,7 @@ run
 ```
 
 ## BASIC 
-### Definition call of functions
+### function Definition and call of functions
 ```
 func lall(a,b)
     return a*b
@@ -55,7 +55,7 @@ endfunc
 print apply(inc@,10)
 print apply(dec@,12) 
 ```
-### Simle  recursion
+### Simple  recursion
 ```
 func factorial(a)
     if a > 1 then
@@ -78,7 +78,7 @@ func printnumbers(n)
     endif
 endfunc
 
-r=printnumbers(5)  ; Gibt 5, 4, 3, 2, 1 aus
+r=printnumbers(5)  ; returns 5, 4, 3, 2, 1 
 ```
 
 ### Lists and map-like functions

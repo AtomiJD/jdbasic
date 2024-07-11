@@ -1,9 +1,12 @@
 func factorial(a)
+    print a
     if a > 1 then
-        return factorial(a-1)*a
+        r = factorial(a-1)
+        r = r * a
     else
-        return a
+        r = a
     endif
+    return r
 endfunc
 
 lall =  factorial(5)

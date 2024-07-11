@@ -390,7 +390,7 @@ runlang {
                     ; txt.print("call2 : , ")
                     value = apu.expr_str()
                 } else {
-                    txt.print("call e: , ")
+                    ;txt.print("call e: , ")
                     value = apu.expr()
                 }
             }
@@ -402,8 +402,7 @@ runlang {
             ; txt.print_ubhex(mt,true)        
             ; txt.print(", i: ")
             ; txt.print_ubhex(i,true)        
-
-            txt.nl()
+            ;txt.nl()
 
             if vartype == 1 {
                 if mt == tokens.L_FAST {
