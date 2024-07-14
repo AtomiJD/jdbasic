@@ -1,10 +1,12 @@
 func factorial(a)
-    print a
     if a > 1 then
-        r = factorial(a-1)
-        r = r * a
+        r=factorial(a-1)
+        r=r*a
+        
+        ;return factorial(a-1)*a
     else
-        r = a
+        r=a
+        ;return= a
     endif
     return r
 endfunc

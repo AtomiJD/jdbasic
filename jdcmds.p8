@@ -13,6 +13,7 @@ runcmd {
     sub do_flupp() {
         txt.print("command FLUPP testcode here.")
         txt.nl()
+        ubyte a=0
     }
 
     sub do_cls() {

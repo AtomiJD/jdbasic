@@ -119,7 +119,7 @@ apu {
         } else if op2 == tokens.L_CALLFUNC {
                 main.pcode++
                 @(&runlang.varname) =  runlang.funcno
-                @(&runlang.varname+1) = 1 ; runcmd.funcvar
+                @(&runlang.varname+1) = 1
                 ind = jdlocal.get_indexbyname(runlang.varname) 
                 lfunc = jdlocal.get_value(ind)  as ubyte
                 r = runlang.do_callfunc(lfunc)

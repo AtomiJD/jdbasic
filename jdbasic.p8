@@ -29,6 +29,7 @@ main {
     ubyte fgcolor = 5
     ubyte bgcolor = 0
     ubyte trace = 0
+    ubyte fake = 0
 
     sub start() {
         ;cx16.rombank(0)
@@ -56,6 +57,7 @@ main {
     sub init_basic() {
         txt.print("Ready")
         txt.nl()
+        fake = 0
     }
 
     sub init_system() {
@@ -84,6 +86,7 @@ main {
         txt.nl()
         txt.print("(c) 2024")
         txt.nl()
+        fake=1 ;txt.CMD should never be last command in function, it will be compiled as jmp, not jsr!
     }   
 
     sub parse() -> ubyte {
@@ -575,7 +578,7 @@ main {
         @(pcode) = tokens.NOCMD
         @(pcode+1) = 0
         cx16.rambank(sbank) 
-        if ifstack.isc > 0 {
+        if ifstack.isc > 0 and ifstack.isc < 255 {
             error.set(4)
             error.print()
             error.clear()

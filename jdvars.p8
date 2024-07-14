@@ -374,7 +374,7 @@ jdlocal {
         }
     }
 
-    sub insert(str name, uword value) -> ubyte{
+    sub insert(str name, uword value) -> ubyte {
         ubyte index = string.hash(name) / 2 ; for 128 vars
         if index == 0 index = 1
         if localvars_name[index] == 0 {
@@ -439,8 +439,12 @@ jdlocal {
     sub get_indexbyname(str name) -> ubyte {
         ubyte index = string.hash(name) / 2 ; for 128 vars
         if index == 0 index = 1
+        if localvars_name[index] == 0 {
+            return 0 
+        }        
+        jdstr.get(localvars_name[index], &buffer)           
         ubyte current = localvars_next[index]
-        if (current == 0) {
+        if (string.compare(name,buffer) == 0) {
             return index
         } else {
             while localvars_next[current] != 0 {
@@ -450,6 +454,10 @@ jdlocal {
                 }
                 current =  localvars_next[current]
             }
+            jdstr.get(localvars_name[current],buffer)
+            if string.compare(name,buffer) == 0 {
+                return current
+            }            
         }
         return 0
     }
@@ -543,7 +551,6 @@ jdfunc {
     ubyte[64] func_next
     uword[64] func_name     ;jdtodo this is only used by pre-compiler, so can be in banked monory!
     uword[64] func_value
-    ubyte[64] func_stack
     str buffer = "\x00" * 17
     uword r = 0
     ubyte cn = 0
@@ -557,7 +564,6 @@ jdfunc {
             func_name[index] = r
             func_value[index] = value
             func_next[index] = 0
-            func_stack[index] = 0
             return index
         } else {
             ubyte current = index
@@ -581,7 +587,6 @@ jdfunc {
             func_name[cn] = r
             func_value[cn] = value
             func_next[cn] = 0
-            func_stack[cn] = 0
             func_next[current] = cn
         }
         return cn
@@ -634,11 +639,4 @@ jdfunc {
         func_value[index] = value
     }
 
-    sub get_stack(ubyte index) -> ubyte {
-        return func_stack[index]
-    }
-
-    sub set_stack(ubyte index, ubyte value) {
-        func_stack[index] = value
-    }    
 }

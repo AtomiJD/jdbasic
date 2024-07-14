@@ -115,9 +115,6 @@ runlang {
             main.pcode++
             n_funcno = @(main.pcode)
         }
-        n_funcit = jdfunc.get_stack(n_funcno)
-        n_funcit++
-        jdfunc.set_stack(n_funcno,n_funcit)
         main.pcode++
         ;read all parameter until RIGHTPAREN
         ;we should better know all params, so we can add local vars with values instead stacking etc.
@@ -130,29 +127,25 @@ runlang {
                     main.pcode++
                     n_t = @(main.pcode)
                     if n_t == tokens.C_RIGHTBRACKET {
-                        ; txt.print("if ")
-
                         @(&varname) = n_funcno
                         @(&varname+1) = n_funcvar
                         jdlocal.insert(varname,cv)  ;save our array name to local var n_funcvar
 
                     } else {
-                        ; txt.print("else ")
                         main.pcode--
                         main.pcode--
                         cv = apu.expr_f()
-                        ; txt.print_uwhex(cv,true)
                         main.pcode--
                         @(&varname) = n_funcno
                         @(&varname+1) = n_funcvar
                         jdlocal.insert(varname,cv)
                     }
                 } else {
-                    callstack_b.push(n_funcno)          ;if we are in recursion : print a(b(1))
-                    callstack_b.push(n_funcvar)
+                    callstack_f.push(n_funcvar)          ;if we are in recursion : print a(b(1))
+                    callstack_f.push(n_funcno)
                     cv = apu.expr()
-                    n_funcvar = callstack_b.pop()
-                    n_funcno = callstack_b.pop()                    
+                    n_funcno = callstack_f.pop()
+                    n_funcvar = callstack_f.pop()                    
                     main.pcode--
                     @(&varname) = n_funcno
                     @(&varname+1) = n_funcvar
@@ -179,7 +172,6 @@ runlang {
         }
         funcno = n_funcno
         funcvar = n_funcvar
-        funcit = n_funcit
         funcstack.push(main.pcode)   
         ;find func address in hashtable and jump there
         toaddr = jdfunc.get_value(funcno)
@@ -188,7 +180,10 @@ runlang {
         main.pcode = cv
         repeat {
             token = @(main.pcode)
-            if token == tokens.NOCMD break
+            if token == tokens.NOCMD {
+                cv = 0
+                break
+            } 
             if token == tokens.RETURN {
                 main.pcode++
                 cv = apu.expr()
@@ -200,9 +195,6 @@ runlang {
             }
             main.statement(token)
             main.pcode++
-            ; if token == tokens.VARIANT {
-            ;     ;main.pcode++
-            ; }
         }
         do_endfunc()
         return cv
@@ -225,7 +217,7 @@ runlang {
         uword toaddr = 0
         uword cv = 0
         ubyte n_t = 0
-        ubyte n_i = 0        
+        ubyte n_i = 0   
         toaddr = funcstack.pop()
         funcno = callstack_b.pop()
         funcvar = callstack_b.pop()
@@ -238,7 +230,6 @@ runlang {
         }
         main.pcode = toaddr
         main.pcode--
-
     }
 
     sub do_if() {
@@ -374,35 +365,21 @@ runlang {
         uword value
         i = main.next() ;get index
         r = main.next() ;get C_EQ
-        ; txt.print("start mt: ")
-        ; txt.print_ubhex(mt,true)        
-        ; txt.print(",i: ")
-        ; txt.print_ubhex(i,true)        
         if r == tokens.C_EQ {
             main.next() ; Skip C_EQ
             varstack.push(vartype as uword)
             varstack.push(i as uword)
             if @(main.pcode) == tokens.CALLFUNC {
-                ; txt.print("call: , ")
                 value = apu.expr_l()
             } else {
                 if vartype == 2 {
-                    ; txt.print("call2 : , ")
                     value = apu.expr_str()
                 } else {
-                    ;txt.print("call e: , ")
                     value = apu.expr()
                 }
             }
-            ; txt.print("val: ")
-            ; txt.print_uwhex(value,true)
             i = varstack.pop() as ubyte
             vartype = varstack.pop() as ubyte
-            ; txt.print(", mt: ")
-            ; txt.print_ubhex(mt,true)        
-            ; txt.print(", i: ")
-            ; txt.print_ubhex(i,true)        
-            ;txt.nl()
 
             if vartype == 1 {
                 if mt == tokens.L_FAST {

@@ -5,10 +5,10 @@ ifstack {
     uword[16] thenadd
     uword[16] eifeadd
     uword val = 0
-    ubyte isc = 0
+    ubyte isc = $FF
 
     sub clear() {
-        isc = 0
+        isc = $FF
     }
 
     sub push(uword elseaddress, uword thenaddress, uword endifaddress) {
@@ -38,10 +38,10 @@ ifstack {
 funcstack {
     uword[32] retaddr
     uword val = 0
-    ubyte fsc = 0
+    ubyte fsc = $FF
 
     sub clear() {
-        fsc = 0
+        fsc = $FF
     }
 
     sub push(uword retaddr1) {
@@ -66,10 +66,10 @@ forstack {
 
     uword val = 0
     ubyte valb = 0
-    ubyte osc = 0
+    ubyte osc = $FF
 
     sub clear() {
-        osc = 0
+        osc = $FF
     }
 
     sub push(uword start_address_code1, ubyte var_type, ubyte var_num, uword for_from_val, uword for_to_val, uword for_step_val) {
@@ -122,12 +122,12 @@ forstack {
 
 ;my vars saved by recursive expr/term calls
 varstack {
-    uword[8] svar
+    uword[32] svar
     uword val = 0
-    ubyte vsc = 0
+    ubyte vsc = $FF
 
     sub clear() {
-        vsc = 0
+        vsc = $FF
     }
 
     sub push(uword svar1) {
@@ -144,12 +144,12 @@ varstack {
 
 ;my vars saved by recursive expr/term calls
 callstack_b {
-    ubyte[256] cbvar
-    ubyte val = 0
     ubyte cbsc = 0
+    ubyte[32] cbvar
+    ubyte val = $FF
 
     sub clear() {
-        cbsc = 0
+        cbsc = $FF
     }
 
     sub push(ubyte cbvar1) {
@@ -164,13 +164,34 @@ callstack_b {
     }
 }
 
-callstack_w {
-    uword[128] cwvar
-    uword val = 0
-    ubyte cwsc = 0
+callstack_f {
+    ubyte[32] cfvar
+    ubyte val = 0
+    ubyte cfsc = $FF
 
     sub clear() {
-        cwsc = 0
+        cfsc = $FF
+    }
+
+    sub push(ubyte cfvar1) {
+        cfsc++
+        cfvar[cfsc] = cfvar1
+    }
+
+    sub pop() -> ubyte {
+        val = cfvar[cfsc]
+        cfsc--
+        return val
+    }
+}
+
+callstack_w {
+    uword[32] cwvar
+    uword val = 0
+    ubyte cwsc = $FF
+
+    sub clear() {
+        cwsc = $FF
     }
 
     sub push(uword cwvar1) {
