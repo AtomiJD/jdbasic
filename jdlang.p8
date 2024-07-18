@@ -116,6 +116,8 @@ runlang {
             n_funcno = @(main.pcode)
         }
         main.pcode++
+        ; txt.print("func: ")
+        ; txt.print_ubhex(n_funcno, true)
         ;read all parameter until RIGHTPAREN
         ;we should better know all params, so we can add local vars with values instead stacking etc.
         do {
@@ -166,7 +168,10 @@ runlang {
                 lende = true
             }
         } until lende == true  
-            
+
+        ; txt.print("var: ")
+        ; txt.print_ubhex(n_funcvar, true)
+        ; txt.nl()
         if @(main.pcode) == tokens.C_RIGHTPAREN {
             main.pcode++
         }
@@ -253,7 +258,7 @@ runlang {
         main.pcode++
         m = @(main.pcode)
         endifaddr = mkword(m,l)
-        ifstack.push(elseaddr, thenaddr, endifaddr) ;Remember my jumpaddresses in case of nested if        
+        ifstack.push(elseaddr, thenaddr, endifaddr) ;Remember my jumpaddresses in case of nested if  
         main.pcode++
         b1 = apu.relation()
         if b1 == true {
@@ -263,7 +268,7 @@ runlang {
             if elseaddr == 0 {
                 main.pcode = endifaddr              ;jump to endif address when there is no else branch
                 main.pcode--
-
+                endifaddr = ifstack.pope()          ;ignore endif and clear stack
             } else {
                 main.pcode = elseaddr               ;jump to else address
                 main.pcode--

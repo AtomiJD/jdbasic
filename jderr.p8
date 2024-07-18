@@ -24,6 +24,7 @@ error {
         txt.print(errtext.txttable[number])
         txt.print(" in line ")
         txt.print_uw(main.linenr)
+        txt.nl()
         number = 0
     }
 }

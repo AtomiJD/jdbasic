@@ -1,0 +1,103 @@
+'Conway's Game of Life 
+
+g1[]=[0]*400    'grid 1 with 20x20
+g2[]=[0]*400    'grid 2 with 20x20
+
+func getz(x,y)
+    return x+y*20
+endfunc
+
+
+func initpattern()
+    z = getz(10, 11)
+    g1[z]=1
+    z = getz(11, 12)
+    g1[z]=1
+    z = getz(12, 10)
+    g1[z]=1
+    z = getz(12, 11)
+    g1[z]=1
+    z = getz(12, 12)
+    g1[z]=1
+endfunc
+
+func printgrid()
+    locate 0,0
+    for i = 0 to 19
+        for j = 0 to 380 step 20
+            p = g1[i + j]
+            if p = 1 then
+                print "O";
+            else
+                print ".";
+            endif
+        next j
+        print 
+    next i
+endfunc
+
+func calcgrid()
+    for i = 0 to 19
+        for j = 0 to 380 step 20
+            n = 0
+            if i > 0 then
+                if j > 20 then
+                    z = i - 1 + j - 20
+                    n = n + g1[z]
+                endif
+                z = i - 1 + j
+                n = n + g1[z]
+                z = i - 1 + j + 20
+                n = n + g1[z]
+            endif
+            if j > 20 then
+                z = i + j - 20
+                n = n + g1[z]
+                z = i + 1 + j - 20
+                n = n + g1[z]
+            endif
+            z = i + j + 1
+            n = n + g1[z]
+            z = i + 1 + j
+            n = n + g1[z]
+            z = i + 1 + j + 20
+            n = n + g1[z]
+            p = g1[i + j]
+            if p = 1 then
+                g2[i + j] = 1
+                if n < 2 then
+                    g2[i + j] = 0
+                endif
+                if n > 3 then
+                    g2[i + j] = 0
+                endif
+            else
+                if n = 3 then
+                    g2[i + j] = 1
+                else
+                    g2[i + j] = 0
+                endif
+            endif
+        next j
+    next i
+endfunc
+
+func copygrid()
+    for i = 0 to 399
+        g1[i]=g2[i]
+    next i
+endfunc
+
+'main loop
+
+initpattern()
+cls 
+
+for g = 1 to 100
+    print jiffi()
+    printgrid()
+    calcgrid()
+    copygrid()
+    print jiffi()
+next g
+

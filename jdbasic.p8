@@ -33,7 +33,7 @@ main {
 
     sub start() {
         ;cx16.rombank(0)
-        ubyte e
+        ubyte e = 0
         init_screen()
         init_system()
         init_basic()
@@ -121,7 +121,7 @@ main {
             }
 
             p = singlechar( @(prgptr))
-            if p == tokens.C_SEMICOLON {
+            if p == tokens.C_APOSTROPHE {
                 do {
                     prgptr++
                 } until (@(prgptr) == 0 or @(prgptr) == $0D or @(prgptr) == $0A)             
@@ -334,7 +334,6 @@ main {
                                 index = jdfunc.get_FuncNoByName(buffer)
                                 if index > 0 {
                                     @(pcode) = index
-                                    prgptr++
                                     pcode++
                                 } else {
                                     index = jdlocal.get_indexbyname(buffer) as ubyte
@@ -347,7 +346,6 @@ main {
                                         @(pcode) = index
                                         pcode++
                                     }
-                                    txt.nl()                                    
                                 }
                         } else {
                             @(pcode) = jdfunc.get_FuncNoByName(buffer)
@@ -431,10 +429,6 @@ main {
                             infuncheader = 1
                             paramcount = 0
                             @(pcode) = jdfunc.insert(buffer, val)
-                            ; txt.print("func: ")
-                            ; txt.print(buffer)
-                            ; txt.print(", ")
-                            ; txt.print_ubhex(@(pcode),true)
                             p_funcno = @(pcode)
                             pcode++
                             @(pcode) = 0        ;2 byte for end func address
@@ -618,6 +612,7 @@ main {
         varstack.clear()
         callstack_b.clear()
         callstack_w.clear()
+        error.clear()
         repeat {
             token = @(pcode)
             ; txt.print_ubhex(token,true)
@@ -776,6 +771,8 @@ main {
             return tokens.C_EQ;
         } else if(ptr == '$') {
             return tokens.C_DOLLAR;
+        } else if(ptr == '\'') {
+            return tokens.C_APOSTROPHE;
         }
         return 0;
     }
@@ -783,7 +780,7 @@ main {
 }
 
 consts {
-    str DELIMITERCHAR = " =,;#()]*/-+%&><"
+    str DELIMITERCHAR = " =,;#()]*/-+%&><'"
 }
 
 tokens {
@@ -841,6 +838,7 @@ tokens {
     const ubyte DOUBLE      = $33
     const ubyte ARRAY       = $34
     const ubyte STRVAR      = $35
+    const ubyte C_APOSTROPHE = $36
     const ubyte L_FAST      = $AE
     const ubyte L_BYTE      = $AF
     const ubyte L_INT       = $B0

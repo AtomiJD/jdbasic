@@ -1,0 +1,13 @@
+func lall()
+
+    print "a";
+    print "b"
+    print
+    print "c"
+    
+
+
+endfunc
+
+
+lall()

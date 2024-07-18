@@ -1,0 +1,12 @@
+x[]=[0]*400
+y[]=[0]*400
+
+
+for i = 1 to 400
+
+    x[i]=i
+    print x[i],"y: ";
+    y[i]=400-i
+    print y[i],"<,";
+
+next i

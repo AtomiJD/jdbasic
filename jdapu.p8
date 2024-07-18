@@ -64,7 +64,7 @@ apu {
             v = jdvars.get_value(@(main.pcode));
         } else if (op3 == tokens.ARRAY) {
             main.pcode++        ; Skip Vartype
-            n = @(main.pcode)       ;get var number
+            n = @(main.pcode)   ; get var number
             main.pcode++  
             callstack_b.push(n)            
             v1 = expr()
@@ -189,7 +189,11 @@ apu {
             op == tokens.OR) {
                 ;void main.next()
                 main.pcode++
+                callstack_w.push(t1)
+                callstack_b.push(op)
                 t2 = term()
+                op = callstack_b.pop()
+                t1 = callstack_w.pop()
                 when op {
                     tokens.C_PLUS -> t1 = t1 + t2
                     tokens.C_MINUS ->  t1 = t1 - t2

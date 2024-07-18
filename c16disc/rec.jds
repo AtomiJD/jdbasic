@@ -5,4 +5,4 @@ func printnumbers(n)
     endif
 endfunc
 
-r=printnumbers(5)  ; Gibt 5, 4, 3, 2, 1 aus
+r=printnumbers(5)  ' returns 5, 4, 3, 2, 1 

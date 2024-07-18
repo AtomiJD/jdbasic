@@ -376,6 +376,11 @@ jdlocal {
 
     sub insert(str name, uword value) -> ubyte {
         ubyte index = string.hash(name) / 2 ; for 128 vars
+        ; txt.nl()
+        ; prnhex(name)
+        ; txt.print("index: ")
+        ; txt.print_ubhex(index,true)
+        ; txt.nl()
         if index == 0 index = 1
         if localvars_name[index] == 0 {
             r = jdstr.add(name)

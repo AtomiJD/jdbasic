@@ -2,15 +2,12 @@ func factorial(a)
     if a > 1 then
         r=factorial(a-1)
         r=r*a
-        
-        ;return factorial(a-1)*a
-    else
+    else        
         r=a
-        ;return= a
     endif
     return r
 endfunc
 
-lall =  factorial(5)
-print "erg: ", lall
-
+print "Factorial from 8..."
+fac =  factorial(8)
+print "Result: ", fac
