@@ -112,7 +112,7 @@ apu {
         } else if op2 == tokens.C_LEFTPAREN {
                 main.pcode++        ; Skip C_LEFTPAREN
                 r = expr()
-                main.pcode++        ; Skip C_RIGHTPAREN
+                ;main.pcode++        ; Skip C_RIGHTPAREN
         } else if op2 == tokens.CALLFUNC {
                 r = runlang.do_callfunc(0)
                 main.pcode--
@@ -135,8 +135,7 @@ apu {
                 r = runcmd.do_len()
         } else if op2 == tokens.JIFFI {
                 r = runcmd.do_get_jiffi()
-        } 
-        else if op2 == tokens.RND {
+        } else if op2 == tokens.RND {
                 r = runcmd.do_get_rnd()
         } else if op2 == tokens.JOY {
                 r = runcmd.do_joy()

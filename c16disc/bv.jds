@@ -1,0 +1,24 @@
+graph 1
+
+color 5,0
+
+bvload "jdspr.bin",1,$3100
+
+print "sprite"
+
+for i = 1 to 12
+    sprinit i,1,(i-1)*256+$3100,1,1,128,0
+    sprpos i,i*20+10,10
+next i
+
+print 1
+
+for i = 1 to 200
+    sprpos 1,i,20
+next i
+
+b=get()
+
+graph 0
+
+print "thats all"

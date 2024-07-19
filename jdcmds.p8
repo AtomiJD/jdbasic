@@ -3,6 +3,7 @@
 %import diskio
 %import string
 %import graphics
+%import sprites
 %import jdbasic
 %import jdapu
 %import jderr
@@ -398,7 +399,123 @@ runcmd {
         if nl == true {
             txt.nl()
         }
-        
+    }
+
+    sub do_bload(ubyte type) -> ubyte{
+        ubyte r = 0
+        ubyte to_bank = 0
+        uword to_address = 0
+        ubyte sbank = 0
+        bool flag
+        r = main.next()
+        if r == tokens.STRING {
+            main.get_string(main.filename)
+            r = main.next()                 ;skip """"
+            r = main.next()                 ;skip comma
+            to_bank = apu.expr() as ubyte   ;get param
+            r = main.next()                 ;get next param            
+            to_address = apu.expr() 
+            void diskio.vload_raw(main.filename,to_bank,to_address)
+            main.pcode--
+            return 1
+        } else {
+            return 0
+        }
+    }
+
+    sub do_sprinit() {
+        ubyte r = 0
+        ubyte a = 0 ;nr
+        ubyte b = 0 ;bank  
+        uword c = 0 ;address
+        ubyte d = 0 ;sizex
+        ubyte e = 0 ;sizey
+        ubyte f = 0 ;color
+        ubyte g = 0 ;paloffset
+        r = main.next()         ;get next param
+        a = apu.expr() as ubyte
+        if @(main.pcode) == tokens.C_COMMA {
+            r = main.next()         ;skip comma
+            b = apu.expr() as ubyte
+            r = main.next()         ;get next param            
+            c = apu.expr() 
+            r = main.next()         ;get next param            
+            d = apu.expr() as ubyte
+            r = main.next()         ;get next param            
+            e = apu.expr() as ubyte
+            r = main.next()         ;get next param            
+            f = apu.expr() as ubyte
+            r = main.next()         ;get next param            
+            g = apu.expr() as ubyte
+            sprites.init(a,b,c,d,e,f,g)
+        } 
+        main.pcode--
+    }
+
+    sub do_sprpos() {
+        ubyte r = 0
+        ubyte a = 0 ;nr
+        ubyte b = 0 ;x
+        ubyte c = 0 ;y
+
+        r = main.next()         ;get next param
+        a = apu.expr() as ubyte
+        if @(main.pcode) == tokens.C_COMMA {
+            r = main.next()         ;skip comma
+            b = apu.expr() as ubyte
+            r = main.next()         ;get next param            
+            c = apu.expr() as ubyte
+            sprites.pos(a,b,c)
+        } 
+        main.pcode--
+    }
+
+    sub do_sprflip() {
+        ubyte r = 0
+        ubyte a = 0 ;nr
+        ubyte b = 0 ;x or y
+        ubyte c = 0 ;flipped?
+
+        r = main.next()         ;get next param
+        a = apu.expr() as ubyte
+        if @(main.pcode) == tokens.C_COMMA {
+            r = main.next()         ;skip comma
+            b = apu.expr() as ubyte
+            r = main.next()         ;get next param            
+            c = apu.expr() as ubyte
+            sprites.pos(a,b,c)
+        } 
+        main.pcode--
+    }
+    sub do_sprhide() {
+        ubyte r = 0
+        ubyte a = 0 ;nr
+        ubyte b = 0 ;x or y
+        ubyte c = 0 ;flipped?
+
+        r = main.next()         ;get next param
+        a = apu.expr() as ubyte
+        sprites.hide(a)
+
+        main.pcode--
+    }
+
+    sub do_sprdata() {
+        ubyte r = 0
+        ubyte a = 0 ;nr
+        ubyte b = 0 ;bank
+        uword c = 0 ;address
+
+        r = main.next()         ;get next param
+        a = apu.expr() as ubyte
+        if @(main.pcode) == tokens.C_COMMA {
+            r = main.next()         ;skip comma
+            b = apu.expr() as ubyte
+            r = main.next()         ;get next param            
+            c = apu.expr()
+            sprites.data(a,b,c)
+        } 
+        main.pcode--
     }
 
 }

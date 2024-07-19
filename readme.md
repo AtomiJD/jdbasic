@@ -21,9 +21,12 @@ run with Shift-Control-R and "Prog8 run"
 
 ## DOS commands:
 ```
-dir
-edit
-load
+dir [<filename>]
+Ex: dir "*.jds"         'List all jds files
+
+edit [<filename>]
+
+load [<filename>]
 list
 run
 ```
@@ -55,6 +58,7 @@ endfunc
 print apply(inc@,10)
 print apply(dec@,12) 
 ```
+
 ### Simple  recursion
 ```
 func factorial(a)
@@ -78,7 +82,7 @@ func printnumbers(n)
     endif
 endfunc
 
-r=printnumbers(5)  ; returns 5, 4, 3, 2, 1 
+r=printnumbers(5)  ' returns 5, 4, 3, 2, 1 
 ```
 
 ### Lists and map-like functions

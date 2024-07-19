@@ -715,6 +715,20 @@ main {
             trace = 0
         } else if token == tokens.PLOT {
             runcmd.do_plot()
+        } else if token == tokens.SPRINIT {
+            runcmd.do_sprinit()
+        } else if token == tokens.SPRPOS {
+            runcmd.do_sprpos()
+        } else if token == tokens.SPRFLIP {
+            runcmd.do_sprflip()
+        } else if token == tokens.SPRHIDE {
+            runcmd.do_sprhide()
+        } else if token == tokens.SPRDATA {
+            runcmd.do_sprdata()
+        } else if token == tokens.BVLOAD {
+            runcmd.do_bload(1)
+        } else if token == tokens.BLOAD {
+            runcmd.do_bload(0)
         } else if token == tokens.LOAD {
             status = rundos.do_load()
             if status == 0 {
@@ -885,6 +899,15 @@ tokens {
     const ubyte PLOT        = $CF
     const ubyte GETXY       = $D0
     const ubyte WAIT        = $D1
+    const ubyte BLOAD       = $D2
+    const ubyte BVLOAD      = $D3
+    const ubyte BSAVE       = $D4
+    const ubyte SPRINIT     = $D5
+    const ubyte SPRPOS      = $D6
+    const ubyte SPRSPLIT    = $D8   ;d7 is P_CALLFUNC
+    const ubyte SPRFLIP     = $D9
+    const ubyte SPRHIDE     = $DA
+    const ubyte SPRDATA     = $DB
     const ubyte LIST        = $70
     const ubyte RUN         = $71
     const ubyte EDIT        = $72
@@ -908,9 +931,7 @@ statements {
         "cls", tokens.CLS,
         "func", tokens.FUNC, 
         "endfunc", tokens.ENDFUNC,
-        "local", tokens.LOCAL,
         "for", tokens.FOR,
-        "break", tokens.BREAK,
         "if", tokens.IF,
         "then", tokens.THEN,
         "else", tokens.ELSE,
@@ -921,12 +942,6 @@ statements {
         "mod", tokens.MOD,
         "true", tokens.TRUE,
         "false", tokens.FALSE,
-        "do", tokens.DO,
-        "while", tokens.WHILE,
-        "repeat", tokens.REPEAT,
-        "until", tokens.UNTIL,
-        "dim", tokens.DIM,
-        "as", tokens.AS,
         "goto", tokens.GOTO,
         "print", tokens.PRINT,
         "return", tokens.RETURN,
@@ -963,8 +978,15 @@ statements {
         "getxy", tokens.GETXY,
         "wait", tokens.WAIT,
         "tron", tokens.TRON,
-        "troff", tokens.TROFF
-
+        "troff", tokens.TROFF,
+        "bload", tokens.BLOAD,
+        "bvload", tokens.BVLOAD,
+        "bsave", tokens.BSAVE,
+        "sprinit", tokens.SPRINIT,
+        "sprpos", tokens.SPRPOS,
+        "sprflip", tokens.SPRFLIP,
+        "sprhide", tokens.SPRHIDE,
+        "sprdata", tokens.SPRDATA
     ]
 
     sub get(str statement) -> uword {
