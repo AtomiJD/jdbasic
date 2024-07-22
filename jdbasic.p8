@@ -908,6 +908,13 @@ tokens {
     const ubyte SPRFLIP     = $D9
     const ubyte SPRHIDE     = $DA
     const ubyte SPRDATA     = $DB
+    const ubyte PSGSTART    = $DC
+    const ubyte PSGVOICE    = $DD
+    const ubyte PSGSILENT   = $DE
+    const ubyte PSGFREQ     = $DF
+    const ubyte PSGENV      = $E0
+    const ubyte PSGVOL      = $E1
+    const ubyte PSGSTOP     = $E2
     const ubyte LIST        = $70
     const ubyte RUN         = $71
     const ubyte EDIT        = $72
@@ -950,17 +957,10 @@ statements {
         "step", tokens.STEP,
         "peek", tokens.PEEK,
         "poke", tokens.POKE,
-        "vpeek", tokens.VPEEK,
-        "vpoke", tokens.VPOKE,
         "flupp", tokens.FLUPP,
         "input", tokens.INPUT,
         "get", tokens.GET,
         "len", tokens.LEN,
-        "color", tokens.COLOR,
-        "locate", tokens.LOCATE,
-        "setchr", tokens.SETCHR,
-        "setclr", tokens.SETCLR,
-        "jiffi", tokens.JIFFI,
         "left", tokens.LEFT,
         "right", tokens.RIGHT,
         "mid", tokens.MID,         
@@ -968,17 +968,27 @@ statements {
         "chr", tokens.CHR,         
         "asc", tokens.ASC,         
         "rnd", tokens.RND,         
-        "joy", tokens.JOY,
         "chr", tokens.CHR,
+        "wait", tokens.WAIT,
+        "tron", tokens.TRON,
+        "troff", tokens.TROFF
+    ]
+
+    uword[] cx16_table = [
+        "vpeek", tokens.VPEEK,
+        "vpoke", tokens.VPOKE,
+        "color", tokens.COLOR,
+        "locate", tokens.LOCATE,
+        "setchr", tokens.SETCHR,
+        "setclr", tokens.SETCLR,
+        "jiffi", tokens.JIFFI,
+        "joy", tokens.JOY,
         "graph", tokens.GRAPH,
         "line", tokens.LINE,
         "rect", tokens.RECT,
         "circle", tokens.CIRCLE,
         "plot", tokens.PLOT,
         "getxy", tokens.GETXY,
-        "wait", tokens.WAIT,
-        "tron", tokens.TRON,
-        "troff", tokens.TROFF,
         "bload", tokens.BLOAD,
         "bvload", tokens.BVLOAD,
         "bsave", tokens.BSAVE,
@@ -986,14 +996,26 @@ statements {
         "sprpos", tokens.SPRPOS,
         "sprflip", tokens.SPRFLIP,
         "sprhide", tokens.SPRHIDE,
-        "sprdata", tokens.SPRDATA
+        "sprdata", tokens.SPRDATA,
+        "psgstart", tokens.PSGSTART,
+        "psgvoice", tokens.PSGVOICE,
+        "psgsiltent", tokens.PSGSILENT,
+        "psgfreq", tokens.PSGFREQ ,
+        "psgenv", tokens.PSGENV,
+        "psgvol", tokens.PSGVOL,
+        "psgstop", tokens.PSGSTOP
     ]
+
 
     sub get(str statement) -> uword {
         ubyte i
         for i in 0 to len(statements_table)-1 step 2 {
             if string.compare(statement, statements_table[i])==0
                 return statements_table[i+1] 
+        }
+        for i in 0 to len(cx16_table)-1 step 2 {
+            if string.compare(statement, cx16_table[i])==0
+                return cx16_table[i+1] 
         }
         return 0
     }

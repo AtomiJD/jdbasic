@@ -1,0 +1,13 @@
+
+
+func f(l,n)
+    print l,n
+    if n < 2 then
+        r=n
+    else
+        r=f(1,n-1)+f(2,n-2)
+    endif
+    return r
+endfunc
+
+print f(3,5)
