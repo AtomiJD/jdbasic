@@ -4,6 +4,7 @@
 %import string
 %import conv
 %import jdcmds
+%import jdcx16
 %import jdlang
 %import jddos
 %import jdvars
@@ -708,6 +709,8 @@ main {
         } else if token == tokens.RECT {
             runcmd.do_rect()
         } else if token == tokens.CIRCLE {
+            runcmd.do_circle()
+        } else if token == tokens.WAIT {
             runcmd.do_wait()
         } else if token == tokens.TRON {
             trace = 1
@@ -716,15 +719,29 @@ main {
         } else if token == tokens.PLOT {
             runcmd.do_plot()
         } else if token == tokens.SPRINIT {
-            runcmd.do_sprinit()
+            runcx16.do_sprinit()
         } else if token == tokens.SPRPOS {
-            runcmd.do_sprpos()
+            runcx16.do_sprpos()
         } else if token == tokens.SPRFLIP {
-            runcmd.do_sprflip()
+            runcx16.do_sprflip()
         } else if token == tokens.SPRHIDE {
-            runcmd.do_sprhide()
+            runcx16.do_sprhide()
         } else if token == tokens.SPRDATA {
-            runcmd.do_sprdata()
+            runcx16.do_sprdata()
+        } else if token == tokens.PSGSTART {
+            runcx16.do_psgstart()
+        } else if token == tokens.PSGVOICE {
+            runcx16.do_psgvoice()
+        } else if token == tokens.PSGSILENT {
+            runcx16.do_psgsilent()
+        } else if token == tokens.PSGFREQ {
+            runcx16.do_psgfreq()
+        } else if token == tokens.PSGENV {
+            runcx16.do_psgenv()
+        } else if token == tokens.PSGVOL {
+            runcx16.do_psgvol()
+        } else if token == tokens.PSGSTOP {
+            runcx16.do_psgstop()
         } else if token == tokens.BVLOAD {
             runcmd.do_bload(1)
         } else if token == tokens.BLOAD {
